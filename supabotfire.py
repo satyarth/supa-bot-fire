@@ -24,7 +24,6 @@ banned_strings = ["Facebook", "YouTube", "http://", "https://", "www.", ".com"]
 
 sentence_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
-#This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
     def __init__(self):
         auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -43,13 +42,13 @@ class StdOutListener(StreamListener):
                 try:
                     text = sentence_detector.tokenize(text.strip())[0]
                     tag_list = nltk.pos_tag(nltk.tokenize.word_tokenize(text))
-                    if tag_list[0][1] == 'PRP'and tag_list[1][1] in verb_forms and not tag_list[1][0].lower() in disallowed_verbs and not tag_list[2][0] in ["n\'t"]:
+                    if tag_list[0][1] == 'PRP'and tag_list[1][1] in verb_forms and not tag_list[1][0].lower() in disallowed_verbs and not tag_list[2][0] in ["n\'t"] and not any("CC" == tag[1] for tag in tag_list):
+                        message += "@"+parsed_data['user']['screen_name'] + " "
                         for tag in tag_list[2:-2]:
                             message += tag[0] + " "
                         message += tag_list[-1][0]
                         message += ": " + tag_list[0][0] + " " + tag_list[1][0] + " that."
-                        message += " @"+parsed_data['user']['screen_name']
-                        print(message)
+                        print message
                         try:
                             api.update_status(status=message, in_reply_to_status_id=status_id)
                         except tweepyerror.TweepError:
@@ -65,15 +64,10 @@ class StdOutListener(StreamListener):
 
 
 if __name__ == '__main__':
-
-    #This handles Twitter authetification and the connection to Twitter Streaming API
     auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
     api = API(auth)
     l = StdOutListener()
     stream = Stream(auth, l)
     while True:
-        try:
-            stream.filter(track=['I'])
-        except requests.packages.urllib3.exceptions.ProtocolError:
-            pass
+        stream.filter(track=['I'])
