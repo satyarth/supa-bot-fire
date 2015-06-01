@@ -3,18 +3,18 @@ import nltk
 disallowed_verbs = ["\'m", "am", "\'ve", "wan", "cant", "@"]
 verb_forms = ["VB", "VBD", "VBP"]
 banned_strings = ["Facebook", "YouTube", "http://", "https://", "www.", ".com"]
-no_pre_space = ["n\'t", "\'re", "\'m", "na", "\'s", "!", ".", ",", "?", "!", ")", ":"]
-no_post_space = ["#", "@", "("]
+no_pre_space = ["n\'t", "\'re", "\'m", "na", "\'s", "!", ".", ",", "?", "!", ")", ":", '\'']
+no_post_space = ["#", "@", "(", '`']
 sentence_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
 def mostly_caps(string):
     lower = 0
     upper = 0
     for char in string:
-        if char.islower():
-            lower += 1
-        else:
+        if char.isupper():
             upper += 1
+        else:
+            lower += 1
     if upper > lower:
         return True
     else:
@@ -29,6 +29,7 @@ def supa_bot_fire(text): # I parse that
             text = sentence_detector.tokenize(text.strip())[0]
             tag_list = nltk.pos_tag(nltk.tokenize.word_tokenize(text))
             if tag_list[0][1] == 'PRP' \
+            and not tag_list[0][1].lower() == "it" \
             and tag_list[1][1] in verb_forms \
             and not tag_list[1][0].lower() in disallowed_verbs \
             and not tag_list[2][0] in ["n\'t"] \

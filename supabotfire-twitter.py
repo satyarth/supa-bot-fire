@@ -6,6 +6,7 @@ from tweepy import error as tweepyerror
 from ConfigParser import SafeConfigParser
 from json import loads
 import HTMLParser
+import time
 
 import supabotfire
 
@@ -38,10 +39,11 @@ class StdOutListener(StreamListener):
                 message += " @" + parsed_data['user']['screen_name']
                 print text
                 print message
-                # try:
-                #     api.update_status(status=message, in_reply_to_status_id=status_id)
-                # except tweepyerror.TweepError:
-                #     pass
+                try:
+                    api.update_status(status=message, in_reply_to_status_id=status_id)
+                    return False
+                except tweepyerror.TweepError:
+                    pass
         except KeyError:
             pass
         return True
@@ -58,3 +60,4 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
     while True:
         stream.filter(track=['I', "we"])
+        time.sleep(30*60)
