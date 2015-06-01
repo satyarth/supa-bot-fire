@@ -22,8 +22,8 @@ ACCESS_SECRET = parser.get('twitter', 'access.secret')
 disallowed_verbs = ["\'m", "am", "\'ve", "wan", "cant"]
 verb_forms = ["VB", "VBD", "VBP"]
 banned_strings = ["Facebook", "YouTube", "http://", "https://", "www.", ".com"]
-no_space = ["n\'t", "\'m", "\'s", "!", ".", ",", "?", "!"]
-
+no_pre_space = ["n\'t", "\'m", "na", "\'s", "!", ".", ",", "?", "!", ")"]
+no_post_space = ["#", "@", "("]
 sentence_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
 class StdOutListener(StreamListener):
@@ -52,8 +52,10 @@ class StdOutListener(StreamListener):
                     and not tag_list[2][0] in ["n\'t"] \
                     and not any("CC" == tag[1] for tag in tag_list):
                         for tag in tag_list[2:-1]:
-                            if any(string in tag[0] for string in no_space):
+                            if any(string in tag[0] for string in no_pre_space):
                                 message = message.strip() + tag[0] + " "
+                            elif any(string in tag[0] for string in no_post_space):
+                                message += tag[0]
                             else:
                                 message += tag[0] + " "
                         if tag_list[-1][0] not in [',', '.', '!', '?']:
@@ -63,10 +65,10 @@ class StdOutListener(StreamListener):
                         message += " @"+parsed_data['user']['screen_name']
                         print text
                         print message
-                        try:
-                            api.update_status(status=message, in_reply_to_status_id=status_id)
-                        except tweepyerror.TweepError:
-                            pass
+                        # try:
+                        #     api.update_status(status=message, in_reply_to_status_id=status_id)
+                        # except tweepyerror.TweepError:
+                        #     pass
                 except IndexError:
                     pass
         except KeyError:
