@@ -5,8 +5,9 @@ from tweepy import API
 from tweepy import error as tweepyerror
 from ConfigParser import SafeConfigParser
 from json import loads
-import HTMLParser
-import time
+from HTMLParser import HTMLParser
+from time import sleep
+from random import randint
 
 import supabotfire
 
@@ -28,7 +29,7 @@ class StdOutListener(StreamListener):
         try:
             parsed_data = loads(data)
             text = parsed_data['text']
-            h = HTMLParser.HTMLParser()
+            h = HTMLParser()
             text = h.unescape(text)
             status_id = parsed_data['id']
 
@@ -60,4 +61,4 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
     while True:
         stream.filter(track=['I', "we"])
-        time.sleep(30*60)
+        sleep(randint(0, 60*20))
