@@ -34,7 +34,9 @@ class StdOutListener(StreamListener):
     def on_data(self, data):
         message = ''
         try:
-            text = loads(data)['text']
+            parsed_data = loads(data)
+            text = parsed_data['text']
+            status_id = parsed_data['id']
             if any(banned_string in text for banned_string in banned_strings):
                 pass
             else:
@@ -48,7 +50,7 @@ class StdOutListener(StreamListener):
                         message += ": " + tag_list[0][0] + " " + tag_list[1][0] + " that."
                         print(message)
                         try:
-                            api.update_status(status=message)
+                            api.update_status(status=message, in_reply_to_status_id=status_id)
                         except tweepyerror.TweepError:
                             pass
                 except IndexError:
