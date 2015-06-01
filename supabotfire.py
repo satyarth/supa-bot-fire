@@ -22,6 +22,7 @@ ACCESS_SECRET = parser.get('twitter', 'access.secret')
 disallowed_verbs = ["\'m", "am", "\'ve", "wan", "cant"]
 verb_forms = ["VB", "VBD", "VBP"]
 banned_strings = ["Facebook", "YouTube", "http://", "https://", "www.", ".com"]
+no_space = ["n\'t", "\'m", "\'s", "!", ".", ",", "?", "!"]
 
 sentence_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
@@ -51,14 +52,17 @@ class StdOutListener(StreamListener):
                     and not tag_list[2][0] in ["n\'t"] \
                     and not any("CC" == tag[1] for tag in tag_list):
                         for tag in tag_list[2:-1]:
-                            message += tag[0] + " "
+                            if any(string in tag[0] for string in no_space):
+                                message = message.strip() + tag[0] + " "
+                            else:
+                                message += tag[0] + " "
                         if tag_list[-1][0] not in [',', '.', '!', '?']:
                             message += tag_list[-1][0]
+                        message = message.strip()
                         message += ": " + tag_list[0][0] + " " + tag_list[1][0] + " that."
                         message += " @"+parsed_data['user']['screen_name']
                         print text
                         print message
-                        print tag_list
                         try:
                             api.update_status(status=message, in_reply_to_status_id=status_id)
                         except tweepyerror.TweepError:
