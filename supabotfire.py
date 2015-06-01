@@ -20,7 +20,7 @@ ACCESS_SECRET = parser.get('twitter', 'access.secret')
 
 disallowed_verbs = ["\'m", "am", "\'ve", "wan"]
 verb_forms = ["VB", "VBD", "VBP"]
-banned_strings = ["Facebook", "YouTube"]
+banned_strings = ["Facebook", "YouTube", "http://", "https://", "www.", ".com"]
 
 sentence_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
