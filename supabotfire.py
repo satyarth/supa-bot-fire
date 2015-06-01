@@ -48,6 +48,7 @@ class StdOutListener(StreamListener):
                             message += tag[0] + " "
                         message += tag_list[-1][0]
                         message += ": " + tag_list[0][0] + " " + tag_list[1][0] + " that."
+                        message += " @"+parsed_data['user']['screen_name']
                         print(message)
                         try:
                             api.update_status(status=message, in_reply_to_status_id=status_id)
