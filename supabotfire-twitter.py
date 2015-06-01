@@ -38,10 +38,10 @@ class StdOutListener(StreamListener):
                 message += " @" + parsed_data['user']['screen_name']
                 print text
                 print message
-                # try:
-                #     api.update_status(status=message, in_reply_to_status_id=status_id)
-                # except tweepyerror.TweepError:
-                #     pass
+                try:
+                    api.update_status(status=message, in_reply_to_status_id=status_id)
+                except tweepyerror.TweepError:
+                    pass
         except KeyError:
             pass
         return True
