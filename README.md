@@ -1,5 +1,7 @@
 > Sweet dolla tea from McDonald's: I drink that
+>
 > Supa hot :fire: fire :fire:: I spit that
+>
 > Two and a Half Men: I watch that
 
 ## Requirements
@@ -19,6 +21,16 @@ nltk.download()
 ```
 Should be self-explanatory from here.
 
+> Glasses, jacket, shirt
+>
+> Call me glasses jacket shirt man
+>
+> Or call me supa hot, boy
+>
+> :100: degrees, leather jacket
+>
+> Cuz I'm supa hot, BOIIIIIIII
+
 ## Configuration
 
 Twitter API keys are stored in a file called `supabotfire.ini` which should look something like:
@@ -33,8 +45,6 @@ access.secret = usecret
 
 Get API keys [here](https://apps.twitter.com/)
 
-> Glasses, jacket, shirt
-> Call me glasses jacket shirt man
-> Or call me supa hot, boy
-> :100: degrees, leather jacket
-> Cuz I'm supa hot, BOIIIIIIII
+> Boom, bam, bop
+>
+> Badda bop boom POW :collision:
