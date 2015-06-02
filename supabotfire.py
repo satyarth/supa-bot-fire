@@ -13,7 +13,7 @@ def mostly_caps(string):
     for char in string:
         if char.isupper():
             upper += 1
-        else:
+        elif char.islower():
             lower += 1
     if upper > lower:
         return True
