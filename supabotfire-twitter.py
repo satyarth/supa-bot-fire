@@ -38,7 +38,7 @@ class StdOutListener(StreamListener):
                 pass
             else:
                 message += " @" + parsed_data['user']['screen_name']
-                print message
+                # print message
                 try:
                     api.update_status(status=message, in_reply_to_status_id=status_id)
                     return False
