@@ -60,4 +60,4 @@ if __name__ == '__main__':
     stream = Stream(auth, l)
     while True:
         stream.filter(track=['I', "we"])
-        sleep(randint(0, 60*20))
+        sleep(randint(0, 60*60))
