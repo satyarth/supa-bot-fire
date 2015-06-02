@@ -1,4 +1,6 @@
-> Supa hot :fire: fire :fire:: I spit that.
+> Sweet dolla tea from McDonald's: I drink that
+> Supa hot :fire: fire :fire:: I spit that
+> Two and a Half Men: I watch that
 
 ## Requirements
 
@@ -30,3 +32,9 @@ access.secret = usecret
 ```
 
 Get API keys [here](https://apps.twitter.com/)
+
+> Glasses, jacket, shirt
+> Call me glasses jacket shirt man
+> Or call me supa hot, boy
+> :100: degrees, leather jacket
+> Cuz I'm supa hot, BOIIIIIIII
