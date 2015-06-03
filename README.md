@@ -27,9 +27,7 @@ Should be self-explanatory from here.
 >
 > Or call me supa hot, boy
 >
-> :100: degrees, leather jacket
->
-> Cuz I'm supa hot, BOIIIIIIII
+> :100: degrees, leather jacket, cuz I'm supa hot, BOIIIIIIII
 
 ## Configuration
 
