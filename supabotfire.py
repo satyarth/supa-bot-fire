@@ -4,7 +4,7 @@ verb_forms = ["VB", "VBD", "VBP"]
 banned_strings = ["Facebook", "YouTube", "http://", "https://", "www.", ".com"]
 no_pre_space = ["n\'t", "\'re", "\'m", "na", "\'s", "!", ".", ",", "?", "!", ")", ":", '\'']
 no_post_space = ["#", "@", "(", '`']
-banned_verbs = ["\'m", "am", "\'ve", "wan", "cant", "wont", "dont", "@", "bae"]
+banned_verbs = ["\'m", "am", "\'ve", "\'re", "wan", "cant", "wont", "dont", "@", "bae"]
 banned_pronouns = ["hey", "it"]
 
 sentence_detector = nltk.data.load('tokenizers/punkt/english.pickle')
