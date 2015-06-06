@@ -34,7 +34,7 @@ def supa_bot_fire(text): # I parse that
             and tag_list[1][1] in verb_forms \
             and not tag_list[0][0].lower() in banned_pronouns \
             and not tag_list[1][0].lower() in banned_verbs \
-            and not tag_list[2][0] in ["n\'t"] \
+            and not tag_list[2][0] in ["n\'t", "ta"] \
             and not any("CC" == tag[1] for tag in tag_list):
                 for tag in tag_list[2:-1]:
                     if any(string == tag[0] for string in no_pre_space):
