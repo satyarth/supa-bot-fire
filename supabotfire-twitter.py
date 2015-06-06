@@ -59,5 +59,8 @@ if __name__ == '__main__':
     l = StdOutListener()
     stream = Stream(auth, l)
     while True:
-        stream.filter(track=['I', "we"])
+        try:
+            stream.filter(track=['I', "we"])
+        except:
+            pass
         sleep(randint(0, 60*60))
