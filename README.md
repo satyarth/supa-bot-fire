@@ -4,6 +4,10 @@
 >
 > Two and a Half Men: I watch that
 
+## How it works
+
+`supabotfire-twitter` gets a stream of tweets containing 'I' or 'we' via Twitter's [streaming API](https://dev.twitter.com/streaming/reference/post/statuses/filter). `supabotfire` looks for tweets in the format of personal pronoun followed by a verb. When it gets a hit, it restructures the sentence and tweets it back at the tweeter. Then it chills out for up to an hour.
+
 ## Requirements
 
 Requires NLTK and tweepy. To install:
