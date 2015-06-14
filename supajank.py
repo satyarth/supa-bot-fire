@@ -9,11 +9,10 @@ from HTMLParser import HTMLParser
 from time import sleep
 from random import randint
 
-# import supabotfire
-import jankyaf
+import supabotfire
 
 parser = SafeConfigParser()
-parser.read('jankyaf.ini')
+parser.read('supabotfire.ini')
 
 CONSUMER_KEY = parser.get('twitter', 'consumer.key')
 CONSUMER_SECRET = parser.get('twitter', 'consumer.secret')
@@ -22,10 +21,8 @@ ACCESS_SECRET = parser.get('twitter', 'access.secret')
 
 class StdOutListener(StreamListener):
     def __init__(self):
-        # auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-        # auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-        # api = API(auth)
-        self.processor = jankyaf.janky_af
+        self.processor = supabotfire.supa_bot_fire
+
     def on_data(self, data):
         try:
             parsed_data = loads(data)
@@ -58,5 +55,5 @@ if __name__ == '__main__':
     l = StdOutListener()
     stream = Stream(auth, l)
     while True:
-        stream.filter(track=['my'])
-        sleep(randint(0, 100))
+        stream.filter(track=['I', 'we'])
+        sleep(randint(0, 60*60))
