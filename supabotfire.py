@@ -22,7 +22,7 @@ def mostly_caps(string):
     else:
         return False
 
-def supa_bot_fire(text): # I parse that
+def supa_bot_fire(text, screen_name): # I parse that
     message = ""
     if any(banned_string in text for banned_string in banned_strings):
         return ""
@@ -51,6 +51,7 @@ def supa_bot_fire(text): # I parse that
                     message += " THAT!!!"
                 else:
                     message += " that."
+                message += " @" + screen_name
                 return message
             else:
                 return ""

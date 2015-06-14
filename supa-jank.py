@@ -21,9 +21,10 @@ ACCESS_SECRET = parser.get('twitter', 'access.secret')
 
 class StdOutListener(StreamListener):
     def __init__(self):
-        auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-        auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-        api = API(auth)
+        # auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        # auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+        # api = API(auth)
+        self.processor = supabotfire.supa_bot_fire
 
     def on_data(self, data):
         try:
@@ -32,13 +33,10 @@ class StdOutListener(StreamListener):
             h = HTMLParser()
             text = h.unescape(text)
             status_id = parsed_data['id']
-
-            message = supabotfire.supa_bot_fire(text)
+            message = self.processor(text, parsed_data['user']['screen_name'])
             if message == "":
                 pass
             else:
-                message += " @" + parsed_data['user']['screen_name']
-                # print message
                 try:
                     api.update_status(status=message, in_reply_to_status_id=status_id)
                     return False
@@ -59,8 +57,5 @@ if __name__ == '__main__':
     l = StdOutListener()
     stream = Stream(auth, l)
     while True:
-        try:
-            stream.filter(track=['I', "we"])
-        except:
-            pass
+        stream.filter(track=['I', "we"])
         sleep(randint(0, 60*60))
