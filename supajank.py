@@ -9,10 +9,11 @@ from HTMLParser import HTMLParser
 from time import sleep
 from random import randint
 
-import supabotfire
+# import supabotfire
+import jankyaf
 
 parser = SafeConfigParser()
-parser.read('janky-af.ini')
+parser.read('jankyaf.ini')
 
 CONSUMER_KEY = parser.get('twitter', 'consumer.key')
 CONSUMER_SECRET = parser.get('twitter', 'consumer.secret')
@@ -24,8 +25,7 @@ class StdOutListener(StreamListener):
         # auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         # auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
         # api = API(auth)
-        self.processor = supabotfire.supa_bot_fire
-
+        self.processor = jankyaf.janky_af
     def on_data(self, data):
         try:
             parsed_data = loads(data)
@@ -38,6 +38,7 @@ class StdOutListener(StreamListener):
                 pass
             else:
                 try:
+                    print message
                     api.update_status(status=message, in_reply_to_status_id=status_id)
                     return False
                 except tweepyerror.TweepError:
@@ -57,5 +58,5 @@ if __name__ == '__main__':
     l = StdOutListener()
     stream = Stream(auth, l)
     while True:
-        stream.filter(track=['I', "we"])
-        sleep(randint(0, 60*60))
+        stream.filter(track=['my'])
+        sleep(randint(0, 100))

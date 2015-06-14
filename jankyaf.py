@@ -1,9 +1,12 @@
 from random import choice
 import re
 
-punctuation = ['.', ' ', ',', '\'', '\"', '(', ')']
-greetings = ['yo', 'hey', 'wassup', 'ayy', '\'sup', 'ayo', 'about it', 'a-yo', 'holla', 'how\'s it hanging', 'what\'s crack-a-lackin\'', 'Greetings and salutations']
-signoffs = ['keep easy', '\'ere me now', 'ya dig', 'word up', '#truth', 'peace out', 'hang loose', 'check it', 'booyakasha', 'respect', 'can ya dig it', 'ya feel me', 'fo real', 'keep it real', 'big up yoself']
+greetings = ['yo', 'hey', 'wassup', 'ayy', '\'sup', 'ayo', 'a-yo', 'holla',\
+    'how\'s it hanging', 'what\'s crack-a-lackin\'', 'Greetings and salutations',\
+    'listen up', 'check it']
+signoffs = ['keep easy', '\'ear me now', 'ya dig', 'word up', '#truth', 'peace out', \
+    'hang loose', 'check it', 'booyakasha', 'respect', 'can ya dig it', 'ya feel me', \
+    'fo real', 'keep it real', 'big up yoself', 'easy now', 'safe', 'trudat']
 banned_strings = ['fitbit', 'mom', 'dad', 'mother', 'father', 'kid', 'son', 'daughter']
 
 def janky_af(text, screen_name):
@@ -16,7 +19,7 @@ def janky_af(text, screen_name):
         if text[i].lower() == "my":
             if text[i+1] in [' ', '']:
                 return ""
-            message += text[i+1]
+            message += text[i+1].lower()
             if text[i+1].endswith('s'):
                 message += " are"
             else:
