@@ -9,8 +9,10 @@ from HTMLParser import HTMLParser
 from time import sleep
 from random import randint
 
+import supabotfire
+
 parser = SafeConfigParser()
-parser.read('config.ini')
+parser.read('janky-af.ini')
 
 CONSUMER_KEY = parser.get('twitter', 'consumer.key')
 CONSUMER_SECRET = parser.get('twitter', 'consumer.secret')
