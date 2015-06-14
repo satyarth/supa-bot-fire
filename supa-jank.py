@@ -9,10 +9,8 @@ from HTMLParser import HTMLParser
 from time import sleep
 from random import randint
 
-import supabotfire
-
 parser = SafeConfigParser()
-parser.read('supabotfire.ini')
+parser.read('config.ini')
 
 CONSUMER_KEY = parser.get('twitter', 'consumer.key')
 CONSUMER_SECRET = parser.get('twitter', 'consumer.secret')
@@ -32,13 +30,10 @@ class StdOutListener(StreamListener):
             h = HTMLParser()
             text = h.unescape(text)
             status_id = parsed_data['id']
-
-            message = supabotfire.supa_bot_fire(text)
+            # message = fun(text, parsed_data['user']['screen_name'])
             if message == "":
                 pass
             else:
-                message += " @" + parsed_data['user']['screen_name']
-                # print message
                 try:
                     api.update_status(status=message, in_reply_to_status_id=status_id)
                     return False
